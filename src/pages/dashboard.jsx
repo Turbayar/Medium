@@ -13,13 +13,13 @@ const useStyles = makeStyles({
   },
 });
 
-const Author = () => {
+const Dashboard = ({user}) => {
   const { root } = useStyles();
 
   return (
     <div className={root}>
       <CssBaseline />
-      <NavBar />
+      <NavBar user={user} />
 
       <main>
         <Container maxWidth="sm">
@@ -49,4 +49,4 @@ const Author = () => {
   );
 };
 
-export default Author;
+export default Dashboard;

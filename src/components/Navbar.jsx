@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import MenuListComposition from "../components/SidebarMenu"
-import { useLocation } from 'react-router-dom';
+import MenuListComposition from "../components/SidebarMenu";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,9 +14,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 
-export default function NavBar() {
+export default function NavBar({ user }) {
+  console.log(user);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const location = useLocation();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -26,13 +25,13 @@ export default function NavBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
- 
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
         <Toolbar>
-          <MenuListComposition/>
-          
+          <MenuListComposition />
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Postloy
           </Typography>
@@ -67,18 +66,26 @@ export default function NavBar() {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
 
-              <Link to="/writing">
-                <Button
+              <Link
+                style={{
+                  background: "white",
+                  color: "#0077b6",
+                  padding: "10px",
+                  borderRadius: "10px",
+                }}
+                to={user ? "/writing" : "/login"}
+              >
+                {/* <Button
                   style={{
                     background: "white",
                     color: "#0077b6",
                     borderRadius: "10px",
                   }}
                   variant="contained"
-                >
-                  Write an Article
-                  <RateReviewIcon sx={{ marginLeft: 0.5 }} />
-                </Button>
+                > */}
+                Write an Article
+                <RateReviewIcon sx={{ marginLeft: 0.5 }} />
+                {/* </Button> */}
               </Link>
             </div>
           }

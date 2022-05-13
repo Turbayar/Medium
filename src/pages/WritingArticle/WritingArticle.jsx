@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { db } from "../firebase";
+import "./WritingArticle.css";
+import { db } from "../../firebase";
 import { doc, collection, setDoc, addDoc,onSnapshot } from "firebase/firestore";
 
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import "./WritingArticle.css";
+
 import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
