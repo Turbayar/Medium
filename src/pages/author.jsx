@@ -1,12 +1,12 @@
+import React from "react";
+import { db } from "../firebase";
+import { doc, collection, setDoc, onSnapshot } from "firebase/firestore";
+
 import NavBar from "../components/Navbar";
 import PostList from "../components/PostList";
-import React from "react";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -14,8 +14,9 @@ const useStyles = makeStyles({
     // backgroundColor: "blue"
   },
 });
+// setDoc(doc(db, "posts", "X4sOcYVdHpekUeEANnH9"), {});
 
-const Client = () => {
+const Author = () => {
   const { root } = useStyles();
 
   return (
@@ -43,7 +44,6 @@ const Client = () => {
             Discover stories, thinking, and expertise from writers on any topic.
           </Typography>
         </Container>
-        
       </main>
 
       <PostList />
@@ -51,4 +51,4 @@ const Client = () => {
   );
 };
 
-export default Client;
+export default Author;

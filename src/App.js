@@ -1,12 +1,25 @@
-import Client from './pages/client.jsx'
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Author from './pages/author'
+import AuthorArticles from './pages/authorArticles'
+import WritingArticle from './WritingArticle/WritingArticle'
+import Dashboard from "./pages/dashboard";
+import './App.css'
+
 
 
 function App() {
   return (
-    <>
-      <Client/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element = {<Dashboard/>}/>
+        <Route path="/author" element = {<Author/>}/>
+        <Route path="/author/Articles" element = {<AuthorArticles/>}/>
+        <Route path="/writing" element = {<WritingArticle/>}/>
+      </Routes>
+
+    </BrowserRouter>
+   
   );
 }
 
