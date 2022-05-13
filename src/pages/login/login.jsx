@@ -1,5 +1,5 @@
 import "./login.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
 import {
   getAuth,
@@ -10,7 +10,7 @@ import { db } from "../../firebase";
 import { doc, collection, setDoc, addDoc,onSnapshot } from "firebase/firestore";
 
 const Login = ({user}) => {
-  let history = useHistory();
+  let navigate = useNavigate();
   const [value, setValue] = useState("");
   const [isStep1, setIsStep1] = useState(true);
 
@@ -48,7 +48,7 @@ const Login = ({user}) => {
       displayName: user.displayName,
       admin: false,
     });
-    history.push("/writing");
+    navigate("/writing");
     
   };
 
