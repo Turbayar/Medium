@@ -20,7 +20,6 @@ export default function WritingArticle() {
  
 
   const onClickPost = async () => {
-    console.log(post, header);
     if( post.length !== 0 && header.length !== 0 ) {
       const docRef = await addDoc(collection(db, "posts"), {
         article: post,
@@ -50,7 +49,7 @@ export default function WritingArticle() {
             height: "80%",
             display: "flex",
             flexDirection: "column",
-            overflow: "scroll"
+            overflow: "auto"
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

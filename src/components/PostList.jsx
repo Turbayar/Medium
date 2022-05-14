@@ -5,7 +5,6 @@ import { db } from "../firebase";
 
 export default function PostList() {
   const [posts, setPosts] = useState([]);
-  const alim = [1, 2, 3, 4, 5, 6, 7, 8];
 
   useEffect(() => {
     const getData = async () => {

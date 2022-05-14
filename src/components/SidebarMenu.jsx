@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { getAuth, signOut } from "firebase/auth";
 import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -36,6 +37,23 @@ export default function MenuListComposition() {
       setOpen(false);
     }
   }
+
+  const onClickSignOut = async (event) => {
+    
+    const auth = getAuth();
+    try {
+      await signOut(auth);
+       if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+      console.log("asd");
+    } catch (e) {
+      console.log(e);
+    }
+    
+  };
 
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
@@ -91,8 +109,8 @@ export default function MenuListComposition() {
                     <MenuItem onClick={handleClose}>View My Articles</MenuItem>
                     </Link>
                     
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                    <MenuItem onClick={onClickSignOut}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

@@ -5,9 +5,11 @@ import {
   getAuth,
   RecaptchaVerifier,
   signInWithPhoneNumber,
+  onAuthStateChanged
 } from "firebase/auth";
-import { db } from "../../firebase";
-import { doc, collection, setDoc, addDoc,onSnapshot } from "firebase/firestore";
+import { db,auth } from "../../firebase";
+import {collection, setDoc, addDoc } from "firebase/firestore";
+
 
 const Login = ({user}) => {
   let navigate = useNavigate();
@@ -24,6 +26,7 @@ const Login = ({user}) => {
       {},
       auth
     );
+
   }, []);
 
   const onClickLogin = async () => {
@@ -34,7 +37,6 @@ const Login = ({user}) => {
       phoneNumber,
       recaptchaVerifier.current
     );
-
     setValue("");
     setIsStep1(false);
   };
@@ -42,13 +44,26 @@ const Login = ({user}) => {
   const onClickCheckCode = async () => {
     const code = value;
     await confirmationResult.current.confirm(code);
-    const docRef = await addDoc(collection(db, "users"), {
-      uid: user.id,
-      phoneNumber: user.phoneNumber,
-      displayName: user.displayName,
-      admin: false,
+    
+
+    onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if (user) {
+        const docRef = async () => {
+          await addDoc(collection(db, "users"), {
+            uid: user.uid,
+            phoneNumber: user.phoneNumber,
+            displayName: user.displayName,
+            admin: false,
+            role: "read",
+          });
+        };
+      }
     });
+   
+    
     navigate("/writing");
+   
     
   };
 

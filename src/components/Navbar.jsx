@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
@@ -75,17 +74,9 @@ export default function NavBar({ user }) {
                 }}
                 to={user ? "/writing" : "/login"}
               >
-                {/* <Button
-                  style={{
-                    background: "white",
-                    color: "#0077b6",
-                    borderRadius: "10px",
-                  }}
-                  variant="contained"
-                > */}
                 Write an Article
                 <RateReviewIcon sx={{ marginLeft: 0.5 }} />
-                {/* </Button> */}
+               
               </Link>
             </div>
           }

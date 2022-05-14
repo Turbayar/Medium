@@ -25,7 +25,6 @@ const style = {
 };
 
 function Post({data}) {
-  console.log(data)
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [open2, setOpener] = useState(false);

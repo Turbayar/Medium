@@ -21,26 +21,25 @@ function App() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      console.log(user);
-      if (user) {
-        const docRef = async () => {
-          await addDoc(collection(db, "users"), {
-            uid: user.uid,
-            phoneNumber: user.phoneNumber,
-            displayName: user.displayName,
-            admin: false,
-            role: "read",
-          });
-        };
+    
+      // if (user) {
+      //   const docRef = async () => {
+      //     await addDoc(collection(db, "users"), {
+      //       uid: user.uid,
+      //       phoneNumber: user.phoneNumber,
+      //       displayName: user.displayName,
+      //       admin: false,
+      //       role: "read",
+      //     });
+      //   };
         setUser({
-          uid: user.uid,
-          phoneNumber: user.phoneNumber,
-          displayName: user.displayName,
+          // uid: user.uid,
+          // phoneNumber: user.phoneNumber,
+          // displayName: user.displayName,
           admin: false,
         });
-      }
-    });
+      // }
+    
   }, []);
 
   // if (user.admin)

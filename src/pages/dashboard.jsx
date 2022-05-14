@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 const Dashboard = ({user}) => {
   const { root } = useStyles();
-
+  console.log(user)
   return (
     <div className={root}>
       <CssBaseline />
