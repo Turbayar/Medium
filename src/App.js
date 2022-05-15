@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { db,auth } from "./firebase";
+import React, { useState, useEffect,createContext } from "react";
+import { db, auth } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   doc,
@@ -7,9 +8,8 @@ import {
   setDoc,
   addDoc,
   onSnapshot,
-  getDoc
+  getDoc,
 } from "firebase/firestore";
-import React, { useState, useEffect } from "react";
 import Author from "./pages/author";
 import AuthorArticles from "./pages/authorArticles";
 import WritingArticle from "./pages/WritingArticle/WritingArticle.jsx";
@@ -19,40 +19,43 @@ import "./App.css";
 
 function App() {
   const auth = getAuth();
-  console.log('user',auth.currentUser)
- useEffect(() => {
-  console.log(auth.currentUser)
-  const getData = async () => {
-    
-    const docRef = doc(db, "current-users", auth.currentUser.uid)
+ const [user, setUser] = useState({})
+ const UserContext = createContext()
+
+  const getData = async (uid) => {
+    const docRef = doc(db, "current-users", uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      // console.log("Document data:", docSnap.data());
+      setUser(docSnap.data())
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   };
-  getData(); 
-},[])
 
-  
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        getData(uid);
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  }, []);
+  console.log(user);
 
-  // if (user.admin)
-  //   return (
-  //     <BrowserRouter>
-  //       <Routes>
-  //         <Route path="/" element={<Dashboard />} />
-  //         {/* <Route path="/login" element={<Login />} /> */}
-  //         {/* <Route path="/author" element={<Author />} /> */}
-  //         {/* <Route path="/author/Articles" element={<AuthorArticles />} /> */}
-  //         {/* <Route path="/writing" element={<WritingArticle />} /> */}
-  //       </Routes>
-  //     </BrowserRouter>
-  //   );
+  if (user.admin)
+    return (
+      
+     <div>admin</div>
+    )
 
   return (
-    <BrowserRouter>
+    <UserContext.Provider value={user}>
+       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
@@ -61,6 +64,8 @@ function App() {
         <Route path="/writing" element={<WritingArticle />} />
       </Routes>
     </BrowserRouter>
+    </UserContext.Provider>
+   
   );
 }
 
