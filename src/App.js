@@ -9,18 +9,19 @@ import {
   addDoc,
   onSnapshot,
   getDoc,
+  
 } from "firebase/firestore";
 import Author from "./pages/author";
-import AuthorArticles from "./pages/authorArticles";
+import AuthorArticles from "./pages/authorArticles.jsx";
 import WritingArticle from "./pages/WritingArticle/WritingArticle.jsx";
 import Dashboard from "./pages/dashboard";
+import DashboardAdmin from "./pagesAdmin/dashboardAdmin.jsx";
 import Login from "./pages/login/login.jsx";
 import "./App.css";
 
 function App() {
   const auth = getAuth();
  const [user, setUser] = useState({})
- const UserContext = createContext()
 
   const getData = async (uid) => {
     const docRef = doc(db, "current-users", uid);
@@ -50,22 +51,23 @@ function App() {
   if (user.admin)
     return (
       
-     <div>admin</div>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<DashboardAdmin user= {user}/>} />
+      </Routes>
+    </BrowserRouter>
     )
 
   return (
-    <UserContext.Provider value={user}>
-       <BrowserRouter>
+      <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard user= {user}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/author" element={<Author />} />
         <Route path="/author/Articles" element={<AuthorArticles />} />
         <Route path="/writing" element={<WritingArticle />} />
       </Routes>
     </BrowserRouter>
-    </UserContext.Provider>
-   
   );
 }
 

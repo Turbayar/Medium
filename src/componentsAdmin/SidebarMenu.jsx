@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { Link } from "react-router-dom";
 
-export default function MenuListComposition() {
+export default function MenuListCompositionAdmin() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -106,9 +106,6 @@ export default function MenuListComposition() {
                     onKeyDown={handleListKeyDown}
                   >
                     <Link to = "/" style={{color:'black'}}> <MenuItem onClick={handleClose}>Dashboard</MenuItem> </Link>
-                    <Link to="/author/Articles" style={{color:'black'}}>
-                    <MenuItem onClick={handleClose}>View My Articles</MenuItem>
-                    </Link>
                     
                     {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                     <MenuItem onClick={onClickSignOut}>Logout</MenuItem>

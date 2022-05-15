@@ -18,7 +18,7 @@ const Login = () => {
 
   const recaptchaVerifier = useRef();
   const confirmationResult = useRef();
-  console.log(auth.currentUser);
+ 
   useEffect(() => {
     const auth = getAuth();
     recaptchaVerifier.current = new RecaptchaVerifier(

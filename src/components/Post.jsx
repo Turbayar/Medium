@@ -61,9 +61,11 @@ function Post({data}) {
           </Typography>
         </CardContent>
 
-        {location.pathname === "/" ? (
+        {location.pathname === "/" 
+        ? (
           <></>
-        ) : (
+        ) 
+        : (
           <CardActions>
             <div>
               <Button onClick={handleOpen}>View</Button>

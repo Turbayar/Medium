@@ -1,6 +1,7 @@
 
 import React from "react";
 import NavBar from "../components/Navbar";
+import NavBarAdmin from "../componentsAdmin/NavbarAdmin";
 import PostList from "../components/PostList";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
@@ -19,7 +20,7 @@ const AuthorArticles = () => {
   return (
     <div className={root}>
       <CssBaseline />
-      <NavBar />
+      <NavBarAdmin />
 
       <main>
         <Container maxWidth="sm">
@@ -30,7 +31,7 @@ const AuthorArticles = () => {
             gutterBottom
             sx={{ marginTop: "100px" }}
           >
-            Postloy
+            My Posts
           </Typography>
           <Typography
             variant="h5"

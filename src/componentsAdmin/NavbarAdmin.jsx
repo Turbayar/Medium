@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import MenuListComposition from "../components/SidebarMenu";
+import MenuListComposition from "../componentsAdmin/SidebarMenu";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,12 +15,11 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import { doc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 
-export default function NavBar({ user }) {
+export default function NavBarAdmin({ user }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -28,9 +27,8 @@ export default function NavBar({ user }) {
   const onClickAdmin = async () => {
     const washingtonRef = doc(db, "current-users", user.id);
     console.log(user.id);
-    // Set the "capital" field of the city 'DC'
     await updateDoc(washingtonRef, {
-      admin: true,
+      admin: false,
     });
     window.location.reload(false)
   };
@@ -52,7 +50,7 @@ export default function NavBar({ user }) {
               marginRight: "10px",
             }}
           >
-            Switch to Admin
+            Switch to Client
           </Button>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Postloy
@@ -88,19 +86,6 @@ export default function NavBar({ user }) {
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
-
-              <Link
-                style={{
-                  background: "white",
-                  color: "#0077b6",
-                  padding: "10px",
-                  borderRadius: "10px",
-                }}
-                to={Object.keys(user).length !== 0 ? "/writing" : "/login"}
-              >
-                Write an Article
-                <RateReviewIcon sx={{ marginLeft: 0.5 }} />
-              </Link>
             </div>
           }
         </Toolbar>

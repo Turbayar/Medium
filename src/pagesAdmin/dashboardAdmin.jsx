@@ -1,24 +1,17 @@
 
 import React from "react";
-import NavBar from "../components/Navbar";
-import PostList from "../components/PostList";
+import NavBarAdmin from "../componentsAdmin/NavbarAdmin";
+import PostListAdmin from "../componentsAdmin/PostListAdmin";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
-  root: {
-    // backgroundColor: "blue"
-  },
-});
 
-const Dashboard = ({user}) => {
-  const { root } = useStyles();
+const DashboardAdmin = ({user}) => {
   return (
-    <div className={root}>
+    <div >
       <CssBaseline />
-      <NavBar user={user}/>
+      <NavBarAdmin user={user}/>
 
       <main>
         <Container maxWidth="sm">
@@ -40,7 +33,7 @@ const Dashboard = ({user}) => {
             Discover stories, thinking, and expertise from writers on any topic.
           </Typography>
         </Container>
-        <PostList />
+        <PostListAdmin user = {user}/>
       </main>
 
      
@@ -48,4 +41,4 @@ const Dashboard = ({user}) => {
   );
 };
 
-export default Dashboard;
+export default DashboardAdmin;
