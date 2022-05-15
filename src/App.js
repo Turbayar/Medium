@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { db } from "./firebase";
+import { db,auth } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   doc,
@@ -7,9 +7,9 @@ import {
   setDoc,
   addDoc,
   onSnapshot,
+  getDoc
 } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
-import { auth } from "./firebase";
 import Author from "./pages/author";
 import AuthorArticles from "./pages/authorArticles";
 import WritingArticle from "./pages/WritingArticle/WritingArticle.jsx";
@@ -18,35 +18,31 @@ import Login from "./pages/login/login.jsx";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState();
+  const auth = getAuth();
+  console.log('user',auth.currentUser)
+ useEffect(() => {
+  console.log(auth.currentUser)
+  const getData = async () => {
+    
+    const docRef = doc(db, "current-users", auth.currentUser.uid)
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  };
+  getData(); 
+},[])
 
-  useEffect(() => {
-    
-      // if (user) {
-      //   const docRef = async () => {
-      //     await addDoc(collection(db, "users"), {
-      //       uid: user.uid,
-      //       phoneNumber: user.phoneNumber,
-      //       displayName: user.displayName,
-      //       admin: false,
-      //       role: "read",
-      //     });
-      //   };
-        setUser({
-          // uid: user.uid,
-          // phoneNumber: user.phoneNumber,
-          // displayName: user.displayName,
-          admin: false,
-        });
-      // }
-    
-  }, []);
+  
 
   // if (user.admin)
   //   return (
   //     <BrowserRouter>
   //       <Routes>
-  //         <Route path="/" element={<Dashboard user={user} />} />
+  //         <Route path="/" element={<Dashboard />} />
   //         {/* <Route path="/login" element={<Login />} /> */}
   //         {/* <Route path="/author" element={<Author />} /> */}
   //         {/* <Route path="/author/Articles" element={<AuthorArticles />} /> */}
@@ -58,8 +54,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard user={user} />} />
-        <Route path="/login" element={<Login user = {user} />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/author" element={<Author />} />
         <Route path="/author/Articles" element={<AuthorArticles />} />
         <Route path="/writing" element={<WritingArticle />} />

@@ -12,9 +12,9 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import RateReviewIcon from "@mui/icons-material/RateReview";
+import { auth } from "../firebase";
 
-export default function NavBar({ user }) {
-  console.log(user);
+export default function NavBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenu = (event) => {
@@ -72,7 +72,7 @@ export default function NavBar({ user }) {
                   padding: "10px",
                   borderRadius: "10px",
                 }}
-                to={user ? "/writing" : "/login"}
+                to={auth.currentUser ? "/writing" : "/login"}
               >
                 Write an Article
                 <RateReviewIcon sx={{ marginLeft: 0.5 }} />

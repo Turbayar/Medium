@@ -8,17 +8,17 @@ import {
   onAuthStateChanged
 } from "firebase/auth";
 import { db,auth } from "../../firebase";
-import {collection, setDoc, addDoc } from "firebase/firestore";
+import {collection, doc, setDoc, addDoc } from "firebase/firestore";
 
 
-const Login = ({user}) => {
+const Login = () => {
   let navigate = useNavigate();
   const [value, setValue] = useState("");
   const [isStep1, setIsStep1] = useState(true);
 
   const recaptchaVerifier = useRef();
   const confirmationResult = useRef();
-
+  console.log(auth.currentUser);
   useEffect(() => {
     const auth = getAuth();
     recaptchaVerifier.current = new RecaptchaVerifier(
@@ -44,28 +44,15 @@ const Login = ({user}) => {
   const onClickCheckCode = async () => {
     const code = value;
     await confirmationResult.current.confirm(code);
-    
-
-    onAuthStateChanged(auth, (user) => {
-      console.log(user);
-      if (user) {
-        const docRef = async () => {
-          await addDoc(collection(db, "users"), {
-            uid: user.uid,
-            phoneNumber: user.phoneNumber,
-            displayName: user.displayName,
-            admin: false,
-            role: "read",
-          });
-        };
-      }
-    });
-   
-    
+    const citiesRef = collection(db, "current-users");
+      await setDoc(doc(citiesRef, auth.currentUser.uid), {
+        phone: auth.currentUser.phoneNumber,
+        id: auth.currentUser.uid,
+        admin: false,
+      });
+    console.log("done");
     navigate("/writing");
-   
-    
-  };
+}
 
   return (
     <div className="body">

@@ -13,13 +13,12 @@ const useStyles = makeStyles({
   },
 });
 
-const Dashboard = ({user}) => {
+const Dashboard = () => {
   const { root } = useStyles();
-  console.log(user)
   return (
     <div className={root}>
       <CssBaseline />
-      <NavBar user={user} />
+      <NavBar />
 
       <main>
         <Container maxWidth="sm">
