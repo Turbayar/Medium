@@ -125,7 +125,7 @@ export default function WritingArticle() {
               <Button onClick={onClickPost}> Yes </Button>
               
                 <Button onClick={handleClose} variant="outlined" sizeSmall sx={{ width: "0.1%" }}>
-                  no
+                  noo
                 </Button>
               
             </Box>
