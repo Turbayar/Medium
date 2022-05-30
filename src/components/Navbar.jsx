@@ -28,11 +28,10 @@ export default function NavBar({ user }) {
   const onClickAdmin = async () => {
     const washingtonRef = doc(db, "current-users", user.id);
     console.log(user.id);
-    // Set the "capital" field of the city 'DC'
     await updateDoc(washingtonRef, {
       admin: true,
     });
-    window.location.reload(false)
+    // window.location.reload(false)
   };
 
   return (
@@ -40,7 +39,7 @@ export default function NavBar({ user }) {
       <AppBar position="fixed">
         <Toolbar>
           <MenuListComposition />
-          <Button
+          {/* <Button
             onClick={onClickAdmin}
             style={{
               width: '200px',
@@ -53,7 +52,7 @@ export default function NavBar({ user }) {
             }}
           >
             Switch to Admin
-          </Button>
+          </Button> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Postloy
           </Typography>

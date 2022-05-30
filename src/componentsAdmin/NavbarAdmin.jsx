@@ -30,7 +30,7 @@ export default function NavBarAdmin({ user }) {
     await updateDoc(washingtonRef, {
       admin: false,
     });
-    window.location.reload(false)
+    // window.location.reload(false)
   };
 
   return (
@@ -38,7 +38,7 @@ export default function NavBarAdmin({ user }) {
       <AppBar position="fixed">
         <Toolbar>
           <MenuListComposition />
-          <Button
+          {/* <Button
             onClick={onClickAdmin}
             style={{
               width: '200px',
@@ -51,7 +51,7 @@ export default function NavBarAdmin({ user }) {
             }}
           >
             Switch to Client
-          </Button>
+          </Button> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Postloy
           </Typography>

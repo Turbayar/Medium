@@ -32,7 +32,7 @@ function PostAdmin({data, user}) {
     await updateDoc(postRef, {
       status: true,
     });
-    window.location.reload(false)
+    // window.location.reload(false)
   }
 
   const Deny = async () => {
